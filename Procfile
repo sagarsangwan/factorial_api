@@ -1,4 +1,4 @@
 import get_factorial
 
 
-web: gunicorn get_factorial.wsgi --log-file -
+web: gunicorn factorial_api.wsgi --log-file -
