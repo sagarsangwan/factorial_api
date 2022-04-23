@@ -14,4 +14,4 @@ def factorial(request, num):
             return 1
         else:
             return n * fact(n-1)
-    return HttpResponse(json.dumps({'factorial': fact(num)}))
+    return HttpResponse(json.dumps({'factorial of ' +  str(num) + " is " : fact(num)}))
