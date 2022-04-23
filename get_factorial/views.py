@@ -1,7 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.http import HttpResponse
+import json
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse ("Hello, world. You're at the get_factorial index.")
+    return render(request, 'index.html')
+
+def factorial(request, num):
+    def fact(n):
+        if n == 0:
+            return 1
+        else:
+            return n * fact(n-1)
+    return HttpResponse(json.dumps({'factorial': fact(num)}))
