@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
@@ -9,9 +9,18 @@ def index(request):
     return render(request, 'index.html')
 
 def factorial(request, num):
-    def fact(n):
-        if n == 0:
+    try:
+        num = int(num)
+    except ValueError:
+        return HttpResponse('Please enter a number.')
+    if num < 0:
+            return HttpResponse('Please enter a positive number.')
+
+    def fact(num):
+        
+        
+        if num == 0:
             return 1
         else:
-            return n * fact(n-1)
-    return HttpResponse(json.dumps({'factorial of ' +  str(num) + " is " : fact(num)}))
+            return num * fact(num-1)
+    return JsonResponse({'factorial': fact(int(num))})
